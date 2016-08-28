@@ -9,17 +9,17 @@
 <form action="{{ url_for( route, id=id )}}" method={{method}}>
     <h1>User Story Manager - {{ title }}</h1>
     <br><label>Story Title</label><br>
-    <input type="text" size="120" name="story_title" value="{{ user_story['title'] }}">
+    <input type="text" size="120" name="story_title" id="story_title" value="{{ user_story['title'] }}">
     <br><label>User Story</label><br>
-    <textarea rows="5" cols="120" name="story">{{ user_story['story'] }}</textarea>
+    <textarea rows="5" cols="120" name="story" id="story">{{ user_story['story'] }}</textarea>
     <br><label>Acceptance Criteria</label><br>
-    <textarea rows="10" cols="120" name="criteria">{{ user_story['criteria'] }}</textarea>
+    <textarea rows="10" cols="120" name="criteria" id="criteria">{{ user_story['criteria'] }}</textarea>
     <br><label>Business Value</label><br>
-    <input type="number" name="business_value" value="{{ user_story['business_value'] }}" min="100" max="1500" step="100">
+    <input type="number" name="business_value" id="business_value" value="{{ user_story['business_value'] }}" min="100" max="1500" step="100">
     <br><label>Estiamtion (h)</label><br>
-    <input type="number" name="estimation" value="{{ user_story['estimation'] }}" min="0.5" max="40" step="0.5">
+    <input type="number" name="estimation" id="estimation" value="{{ user_story['estimation'] }}" min="0.5" max="40" step="0.5">
     <br><label>Status</label><br>
-    <select name="status">
+    <select name="status" id="status">
         {% for status in statuses %}
             {% if status in user_story['status'] %}
                 <option selected>{{ status }}</option>
@@ -29,7 +29,7 @@
         {% endfor %}
     </select>
     <p></p>
-    <input type="submit" value="{{ button }}">
+    <input type="submit" value="{{ button }}" id="{{button}}_story_button">
 </form>
 
 </body>
