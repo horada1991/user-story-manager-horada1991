@@ -8,19 +8,19 @@
 
 <form action="{{ url_for('new_story') }}" method="post">
     <h1>User Story Manager - {{ title }}</h1>
-    <h3>Story Title</h3>
+    <br><label>Story Title</label><br>
     <input type="text" size="120" name="story_title">
-    <h3>User Story</h3>
+    <br><label>User Story</label><br>
     <textarea rows="5" cols="120" name="story">
     </textarea>
-    <h3>Acceptance Criteria</h3>
+    <br><label>Acceptance Criteria</label><br>
     <textarea rows="10" cols="120" name="criteria">
     </textarea>
-    <h3>Business Value</h3>
+    <br><label>Business Value</label><br>
     <input type="number" name="business_value" value="100" min="100" max="1500" step="100">
-    <h3>Estiamtion (h)</h3>
+    <br><label>Estiamtion (h)</label><br>
     <input type="number" name="estimation" value="0.5" min="0.5" max="40" step="0.5">
-    <h3>Status</h3>
+    <br><label>Status</label><br>
     <select name="status">
         <option>Planning</option>
         <option>To Do</option>
