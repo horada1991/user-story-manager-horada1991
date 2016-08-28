@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, g, url_for, request, flash, redirect, render_template
+from flask import Flask, g, url_for, request, redirect, render_template
 
 app = Flask('User Story Manager')
 DATABASE = 'user_story_manager.db'
@@ -40,7 +40,7 @@ def editable_form(story_id):
 # Add new story
 @app.route('/story', methods=['GET'])
 def blank_form():
-    return render_template('form.html', title='Add new Story')
+    return render_template('form.html', title='Add new Story', button='Create')
 
 
 @app.route('/story', methods=['POST'])
