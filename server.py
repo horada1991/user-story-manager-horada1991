@@ -29,19 +29,32 @@ def initdb():
     db.commit()
     print('Initialized the database.')
 
-"""Finish this!"""
-# @app.route('/story', methods=['POST'])
-# def new_story():
-#     db = get_db()
-#     query = """INSERT INTO user_story_manager (title, story, criteria, business_value, estimation, status)
-#                VALUES (?, ?, ?, ?, ?, ?)""",\
-#             [request.form['title'], request.form['story'], request.form['criteria'],
-#              request.form['business_value'], request.form['estimation'], request.form['status']]
-#
-#     db.execute(query)
-#     db.commit()
-#     flash('New story was successfully added')
-#     return redirect(url_for('list'))
+
+"""Edit a story"""
+"""!!!!FINISH THIS!!!!"""
+@app.route('/story/<story_id>', methods=['GET'])
+def editable_form(story_id):
+    pass
+
+
+# Add new story
+@app.route('/story', methods=['GET'])
+def blank_form():
+    return render_template('form.html', title='Add new Story')
+
+
+@app.route('/story', methods=['POST'])
+def new_story():
+    db = get_db()
+    db.execute("""INSERT INTO user_stories (title, story, criteria, business_value, estimation, status)
+               VALUES (?, ?, ?, ?, ?, ?)""",
+               [request.form['story_title'], request.form['story'], request.form['criteria'],
+                request.form['business_value'], request.form['estimation'], request.form['status']])
+    db.commit()
+    return redirect(url_for('list_stories'))
+
+
+"""List user stories"""
 
 
 @app.route('/list', methods=['GET'])
