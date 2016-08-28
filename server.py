@@ -30,20 +30,54 @@ def initdb():
     print('Initialized the database.')
 
 
-#Edit story
-"""NEED TO FINISH"""
-@app.route('/story/<story_id>', methods=['GET'])
-def editable_form(story_id):
-    pass
+# helper function
+def _get_data(id, db):
+    titles = ('title', 'story', 'criteria',
+                  'business_value', 'estimation', 'status')
+    user_story = {}
+    cur = db.execute("""SELECT title, story, criteria, business_value, estimation, status FROM user_stories WHERE id=?""", [id])
+    try:
+        story = cur.fetchall()[0]
+        for i, title in enumerate(titles):
+            print(story[i], title)
+            user_story[title] = story[i]
+        return user_story
+    except IndexError:
+        return user_story
+
+
+# Edit story
+@app.route('/story/<id>', methods=['GET'])
+def editable_form(id):
+    db = get_db()
+    story = _get_data(id, db)
+    return render_template('form.html', route='update_story', method='post',
+                           title='Edit Story', button='Update', user_story=story, id=id,
+                           statuses=('Planning', 'To Do', 'In Progress', 'Review', 'Done'))
+
+
+@app.route('/update/<id>', methods=['POST'])
+def update_story(id):
+    db = get_db()
+    db.execute("""UPDATE user_stories SET title=?, story=?, criteria=?, business_value=?, estimation=?, status=?
+                  WHERE id=?""",
+               [request.form['story_title'], request.form['story'],
+                request.form['criteria'], request.form['business_value'],
+                request.form['estimation'], request.form['status'], id])
+    db.commit()
+    return redirect(url_for('list_stories'))
 
 
 # Add new story
 @app.route('/story', methods=['GET'])
 def blank_form():
-    return render_template('form.html', title='Add new Story', button='Create')
+    story = {}
+    return render_template('form.html', route='new_story', method='post',
+                           title='Add new Story', button='Create', user_story=story,
+                           statuses=('Planning', 'To Do', 'In Progress', 'Review', 'Done'))
 
 
-@app.route('/story', methods=['POST'])
+@app.route('/add', methods=['POST'])
 def new_story():
     db = get_db()
     if request.form['story_title'] == "":
@@ -68,10 +102,9 @@ def list_stories():
 
 
 # Delete story
-@app.route('/list/<id>', methods=['POST'])
+@app.route('/del/<id>', methods=['POST'])
 def delete_story(id):
     db = get_db()
     db.execute("""DELETE FROM user_stories WHERE id=?""", [id])
     db.commit()
     return redirect(url_for('list_stories'))
-

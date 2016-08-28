@@ -34,7 +34,11 @@
             <td width="50">{{ entry[4] }}</td>
             <td width="50">{{ entry[5] }}</td>
             <td width="80">{{ entry[6] }}</td>
-            <td width="30">edit</td>
+            <td width="30">
+                <form action="{{ url_for('editable_form', id=entry[0]) }}" method="get">
+                    <input type="image" src="http://i.imgur.com/Cw6UUMq.png" ALT="SUBMIT" width="30" height="30">
+                </form>
+            </td>
             <td width="30">
                 <form action="{{ url_for('delete_story', id=entry[0]) }}" method="post">
                     <input type="image" src="http://i.imgur.com/Bscfy8o.png" ALT="SUBMIT" width="30" height="30">
