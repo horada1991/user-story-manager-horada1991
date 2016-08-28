@@ -9,7 +9,7 @@
 <body>
 
 <h1>User Story Manager</h1>
-<form action="{{ url_for('blank_form') }}" method=get>
+<form action="{{ url_for('blank_form') }}" method="get">
     <input type="submit" value="Add a new User Story">
 </form>
 
@@ -35,7 +35,11 @@
             <td>{{ entry[5] }}</td>
             <td>{{ entry[6] }}</td>
             <td>edit</td>
-            <td>delete</td>
+            <td>
+                <form action="{{ url_for('delete_story', id=entry[0]) }}" method="post">
+                    <input type="image" src="http://i.imgur.com/Bscfy8o.png" ALT="SUBMIT" width="30" height="30">
+                </form>
+            </td>
         </tr>
     {% endfor %}
 </table>
