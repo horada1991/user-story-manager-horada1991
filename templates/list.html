@@ -8,11 +8,11 @@
 
 <body>
 
-<div class="page">
 <h1>User Story Manager</h1>
-<form action="{{ url_for('list_stories') }}" method=post>
+<form action="{{ url_for('blank_form') }}" method=get>
     <input type="submit" value="Add a new User Story">
 </form>
+
 <table border="3">
     <tr>
         <td>ID</td>
@@ -39,7 +39,6 @@
         </tr>
     {% endfor %}
 </table>
-</div>
 
 </body>
 
