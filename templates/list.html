@@ -1,0 +1,46 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <title>User Story Manager</title>
+</head>
+
+<body>
+
+<div class="page">
+<h1>User Story Manager</h1>
+<form action="{{ url_for('list_stories') }}" method=post>
+    <input type="submit" value="Add a new User Story">
+</form>
+<table border="3">
+    <tr>
+        <td>ID</td>
+        <td>Story Title</td>
+        <td>User Story</td>
+        <td>Acceptance Criteria</td>
+        <td>Business Value</td>
+        <td>Estimation (h)</td>
+        <td>Status</td>
+        <td> </td>
+        <td> </td>
+    </tr>
+    {% for entry in entries %}
+        <tr>
+            <td>{{ entry[0] }}</td>
+            <td>{{ entry[1] }}</td>
+            <td>{{ entry[2] }}</td>
+            <td>{{ entry[3] }}</td>
+            <td>{{ entry[4] }}</td>
+            <td>{{ entry[5] }}</td>
+            <td>{{ entry[6] }}</td>
+            <td>edit</td>
+            <td>delete</td>
+        </tr>
+    {% endfor %}
+</table>
+</div>
+
+</body>
+
+</html>
