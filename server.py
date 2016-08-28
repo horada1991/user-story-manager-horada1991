@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, jsonify, g, current_app, request
+from flask import Flask, g, url_for, request, flash, redirect
 
 app = Flask('User Story Manager')
 DATABASE = 'user_story_manager.db'
@@ -28,6 +28,21 @@ def initdb():
         db.cursor().executescript(f.read())
     db.commit()
     print('Initialized the database.')
+
+
+@app.route('/story', methods=['POST'])
+def new_story():
+    db = get_db()
+    query = """INSERT INTO user_story_manager (title, story, criteria, business_value, estimation, status)
+               VALUES (?, ?, ?, ?, ?, ?)""",\
+            [request.form['title'], request.form['story'], request.form['criteria'],
+             request.form['business_value'], request.form['estimation'], request.form['status']]
+
+    db.execute(query)
+    db.commit()
+    flash('New story was successfully added')
+    return redirect(url_for('list'))
+
 
 
 # with app.app_context():
