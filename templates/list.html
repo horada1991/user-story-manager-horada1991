@@ -27,15 +27,15 @@
     </tr>
     {% for entry in entries %}
         <tr>
-            <td>{{ entry[0] }}</td>
-            <td>{{ entry[1] }}</td>
-            <td>{{ entry[2] }}</td>
-            <td>{{ entry[3] }}</td>
-            <td>{{ entry[4] }}</td>
-            <td>{{ entry[5] }}</td>
-            <td>{{ entry[6] }}</td>
-            <td>edit</td>
-            <td>
+            <td width="20">{{ entry[0] }}</td>
+            <td width="80">{{ entry[1] }}</td>
+            <td width="80">{{ entry[2] }}</td>
+            <td width="200">{{ entry[3] }}</td>
+            <td width="50">{{ entry[4] }}</td>
+            <td width="50">{{ entry[5] }}</td>
+            <td width="80">{{ entry[6] }}</td>
+            <td width="30">edit</td>
+            <td width="30">
                 <form action="{{ url_for('delete_story', id=entry[0]) }}" method="post">
                     <input type="image" src="http://i.imgur.com/Bscfy8o.png" ALT="SUBMIT" width="30" height="30">
                 </form>
