@@ -46,11 +46,14 @@ def blank_form():
 @app.route('/story', methods=['POST'])
 def new_story():
     db = get_db()
-    db.execute("""INSERT INTO user_stories (title, story, criteria, business_value, estimation, status)
-               VALUES (?, ?, ?, ?, ?, ?)""",
-               [request.form['story_title'], request.form['story'], request.form['criteria'],
-                request.form['business_value'], request.form['estimation'], request.form['status']])
-    db.commit()
+    if request.form['story_title'] == "":
+        pass
+    else:
+        db.execute("""INSERT INTO user_stories (title, story, criteria, business_value, estimation, status)
+                   VALUES (?, ?, ?, ?, ?, ?)""",
+                   [request.form['story_title'], request.form['story'], request.form['criteria'],
+                    request.form['business_value'], request.form['estimation'], request.form['status']])
+        db.commit()
     return redirect(url_for('list_stories'))
 
 
