@@ -30,8 +30,8 @@ def initdb():
     print('Initialized the database.')
 
 
-"""Edit a story"""
-"""!!!!FINISH THIS!!!!"""
+#Edit story
+"""NEED TO FINISH"""
 @app.route('/story/<story_id>', methods=['GET'])
 def editable_form(story_id):
     pass
@@ -54,9 +54,7 @@ def new_story():
     return redirect(url_for('list_stories'))
 
 
-"""List user stories"""
-
-
+# List user stories
 @app.route('/list', methods=['GET'])
 def list_stories():
     db = get_db()
@@ -64,3 +62,13 @@ def list_stories():
     cur = db.execute(query)
     stories = cur.fetchall()
     return render_template('list.html', entries=stories)
+
+
+# Delete story
+@app.route('/list/<id>', methods=['POST'])
+def delete_story(id):
+    db = get_db()
+    db.execute("""DELETE FROM user_stories WHERE id=?""", [id])
+    db.commit()
+    return redirect(url_for('list_stories'))
+
