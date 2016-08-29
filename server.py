@@ -30,6 +30,12 @@ def initdb():
     print('Initialized the database.')
 
 
+# Redirect to /list
+@app.route('/', methods=['GET'])
+def redirect_to_list():
+    return redirect(url_for('list_stories'))
+
+
 # helper function
 def _get_data(id, db):
     titles = ('title', 'story', 'criteria',
