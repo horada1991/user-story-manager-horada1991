@@ -86,14 +86,11 @@ def blank_form():
 @app.route('/add', methods=['POST'])
 def new_story():
     db = get_db()
-    if request.form['story_title'] == "":
-        pass
-    else:
-        db.execute("""INSERT INTO user_stories (title, story, criteria, business_value, estimation, status)
-                   VALUES (?, ?, ?, ?, ?, ?)""",
-                   [request.form['story_title'], request.form['story'], request.form['criteria'],
-                    request.form['business_value'], request.form['estimation'], request.form['status']])
-        db.commit()
+    db.execute("""INSERT INTO user_stories (title, story, criteria, business_value, estimation, status)
+               VALUES (?, ?, ?, ?, ?, ?)""",
+               [request.form['story_title'], request.form['story'], request.form['criteria'],
+                request.form['business_value'], request.form['estimation'], request.form['status']])
+    db.commit()
     return redirect(url_for('list_stories'))
 
 
@@ -114,3 +111,6 @@ def delete_story(id):
     db.execute("""DELETE FROM user_stories WHERE id=?""", [id])
     db.commit()
     return redirect(url_for('list_stories'))
+
+if __name__ == '__main__':
+    app.run()
